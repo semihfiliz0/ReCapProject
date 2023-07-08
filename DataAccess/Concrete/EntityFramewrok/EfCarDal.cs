@@ -16,49 +16,58 @@ namespace DataAccess.Concrete.EntityFramewrok
     {
         public void Add(Car entity)
         {
-            using (VehicleContext Context = new VehicleContext())
+            using (VehicleContext context = new VehicleContext())
             {
-                var addedEntity = Context.Entry(entity);
+                if (entity.BrandName.Length < 2)
+                {
+                    Console.WriteLine("Uyarı! İsim en az 2 Harfden oluşmalıdır.");
+                }
+                if (entity.CarDailyPrice < 0)
+                {
+                    Console.WriteLine("Uyarı! Günlük fiyat 0'dan fazla olmalıdır.");
+                }
+
+                var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                Context.SaveChanges();  
+                context.SaveChanges();  
             }
         }
 
         public void Delete(Car entity)
         {
-            using (VehicleContext Context = new VehicleContext())
+            using (VehicleContext context = new VehicleContext())
             {
-                var deletedEntity = Context.Entry(entity);
+                var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
-                Context.SaveChanges();
+                context.SaveChanges();
             }
         }
 
         public Car Get(Expression<Func<Car, bool>> filter)
         {
-            using (VehicleContext Context = new VehicleContext())
+            using (VehicleContext context = new VehicleContext())
             {
-                return Context.Set<Car>().SingleOrDefault(filter);
+                return context.Set<Car>().SingleOrDefault(filter);
             }
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            using (VehicleContext Context = new VehicleContext())
+            using (VehicleContext context = new VehicleContext())
             {
                 return filter == null
-                    ? Context.Set<Car>().ToList()
-                    : Context.Set<Car>().Where(filter).ToList();
+                    ? context.Set<Car>().ToList()
+                    : context.Set<Car>().Where(filter).ToList();
             }
         }
 
         public void Update(Car entity)
         {
-            using (VehicleContext Context = new VehicleContext())
+            using (VehicleContext context = new VehicleContext())
             {
-                var updated = Context.Entry(entity);
-                updated.State = EntityState.Modified;
-                Context.SaveChanges();
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +12,54 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramewrok
 {
-    public class EfColorDal : IEntityRepository<Car>
+    public class EfColorDal : IEntityRepository<Color>
     {
-        public void Add(Car entity)
+        public void Add(Color entity)
         {
-            throw new NotImplementedException();
+            using (VehicleContext context = new VehicleContext())
+            {
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+            }
         }
 
-        public void Delete(Car entity)
+        public void Delete(Color entity)
         {
-            throw new NotImplementedException();
+            using (VehicleContext context = new VehicleContext())
+            {
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Color Get(Expression<Func<Color, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (VehicleContext context = new VehicleContext())
+            {
+                return context.Set<Color>().SingleOrDefault(filter);
+            }
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (VehicleContext context = new VehicleContext())
+            {
+                return filter == null
+                  ? context.Set<Color>().ToList()
+                  : context.Set<Color>().Where(filter).ToList();
+            }
         }
 
-        public void Update(Car entity)
+        public void Update(Color entity)
         {
-            throw new NotImplementedException();
+            using (VehicleContext context = new VehicleContext())
+            {
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }
