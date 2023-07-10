@@ -6,4 +6,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Abstract - Copy\**" />
+    <EmbeddedResource Remove="Abstract - Copy\**" />
+    <None Remove="Abstract - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core2\Core2.csproj" />
+  </ItemGroup>
+
 </Project>

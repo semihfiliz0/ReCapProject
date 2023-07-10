@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         //Hangi class'ım hangi tabloya denk gelicek
 
-        public DbSet<Car> cars { get; set; }
+        public DbSet<Car> Cars { get; set; }
 
         public DbSet<Brand> brands { get; set; }
 

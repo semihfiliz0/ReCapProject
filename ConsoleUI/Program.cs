@@ -2,27 +2,53 @@
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFramewrok;
 using Entities.Concrete;
+using Entities.DTOs;
 
 CarManager carmanager = new CarManager(new EfCarDal());
 
-foreach (var car in carmanager.GetByUnitPrice(10000,40000))
+//CarByUnitPrice(carmanager);
+
+//CarByBrandId(carmanager);
+
+//CarByColorID(carmanager);
+
+static void CarByColorId(CarManager carmanager)
 {
-    Console.WriteLine(car.BrandName+" "+car.CarDailyPrice);
+    foreach (var car in carmanager.GetCarsByColorId(7))
+    {
+        Console.WriteLine(car.CarName + " " + car.CarPrice);
+    }
+
+    Console.WriteLine("*********************");
 }
 
-Console.WriteLine("*********************");
-
-foreach (var car in carmanager.GetCarsByBrandId(5))
+static void CarByBrandId(CarManager carmanager)
 {
-    Console.WriteLine(car.BrandName + " " + car.CarDailyPrice);
+    foreach (var car in carmanager.GetCarsByBrandId(5))
+    {
+        Console.WriteLine(car.CarName + " " + car.CarPrice);
+    }
+
+    Console.WriteLine("*********************");
 }
 
-Console.WriteLine("*********************");
-
-
-foreach (var car in carmanager.GetCarsByColorId(7))
+static void CarByUnitPrice(CarManager carmanager)
 {
-    Console.WriteLine(car.BrandName + " " + car.CarDailyPrice);
+    foreach (var car in carmanager.GetByUnitPrice(10000, 40000))
+    {
+        Console.WriteLine(car.CarName + " " + car.CarPrice);
+    }
 }
 
-Console.WriteLine("*********************");
+
+
+CarDetails(carmanager);
+
+static void CarDetails(CarManager carmanager)
+{
+    foreach (var car in carmanager.GetCarDetails())
+    {
+        Console.WriteLine();
+        Console.WriteLine(car.BrandName + " " + car.CarName + " - " + car.CarYear);
+    }
+}
