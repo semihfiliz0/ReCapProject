@@ -4,14 +4,13 @@ using DataAccess.Concrete.EntityFramewrok;
 using Entities.Concrete;
 using Entities.DTOs;
 
-CarManager carmanager = new CarManager(new EfCarDal());
 
 //CarByUnitPrice(carmanager);
 
 //CarByBrandId(carmanager);
 
 //CarByColorID(carmanager);
-
+/*
 static void CarByColorId(CarManager carmanager)
 {
     foreach (var car in carmanager.GetCarsByColorId(7))
@@ -32,7 +31,7 @@ static void CarByBrandId(CarManager carmanager)
     Console.WriteLine("*********************");
 }
 
-static void CarByUnitPrice(CarManager carmanager)
+    static void CarByUnitPrice(CarManager carmanager)
 {
     foreach (var car in carmanager.GetByUnitPrice(10000, 40000))
     {
@@ -40,15 +39,38 @@ static void CarByUnitPrice(CarManager carmanager)
     }
 }
 
+*/
 
-
-CarDetails(carmanager);
-
-static void CarDetails(CarManager carmanager)
+//CarDetails(carmanager);
+/*
+static void CarDetails()
 {
-    foreach (var car in carmanager.GetCarDetails())
+    CarManager carmanager = new CarManager(new EfCarDal());
+
+    foreach (var car in carmanager.GetAll())
     {
         Console.WriteLine();
-        Console.WriteLine(car.BrandName + " " + car.CarName + " - " + car.CarYear);
+        Console.WriteLine(car.carName);
     }
+}*/
+static void CarTest()
+{
+    CarManager carManager = new CarManager(new EfCarDal());
+
+    var result = carManager.GetCarDetails();
+
+    if (result.Success)
+    {
+        foreach (var car in result.Data)
+        {
+            Console.WriteLine(car.BrandName + " - " + car.CarName+" : "+car.CarPrice+"TL");
+        }
+    }
+
+    else
+    {
+        Console.WriteLine(result.Message);
+    }
+
 }
+CarTest();
