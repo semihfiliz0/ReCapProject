@@ -66,7 +66,11 @@ namespace Business.Concrete
             return new Result(true,"Ürün eklendi");
 
         }
+        public IResult Delete(Car car)
+        {
+            _carDal.Delete(car);
+            return new Result(true, "Ürün silindi");
+        }
 
-       
     }
 }
