@@ -17,5 +17,8 @@ namespace Business.Constant
         public static string UserAdded = "Kullanıcı eklendi";
         public static string UserNameInvalid = "Kullanıcı ismi geçersiz";
         public static string UserListed = "Kullanıcı listelendi";
+
+        public static string RentalInvalid = "Araba teslim edilmedi";
+
     }
 }

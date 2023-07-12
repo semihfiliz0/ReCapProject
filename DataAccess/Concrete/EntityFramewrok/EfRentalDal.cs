@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,9 @@ namespace DataAccess.Concrete.EntityFramewrok
     public class EfRentalDal : EfEntitiyRepositoryBase<Rental, VehicleContext>, IRentalDal
     {
         //Değişebilir!
-
-
+        public List<RentalDetailDetail> GetRentalDetails()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
